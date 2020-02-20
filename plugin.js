@@ -16,15 +16,12 @@ function initPlugin(on, globalConfig = {}) {
   globalConfig.env[CONFIG_KEY] = JSON.stringify(config);
 
   on('before:browser:launch', (browser = {}, launchOptions) => {
-    // Adding sub objects/keys to `Cypress.env` that don't exist in `cypress.json` doesn't work.
-    // That's why the config is stringified and parsed again in `src/utils/commands/getConfig.js#fixConfig`.
-    globalConfig.env[CONFIG_KEY] = JSON.stringify(config);
-    
     if (browser.name === 'chrome') {
-      launchOptions.args.push('--font-render-hinting=medium');
-      launchOptions.args.push('--enable-font-antialiasing');
-      launchOptions.args.push('--disable-gpu');
+      launchOptions.push('--font-render-hinting=medium');
+      launchOptions.push('--enable-font-antialiasing');
+      launchOptions.push('--disable-gpu');
     }
+
     return launchOptions;
   });
 
@@ -32,5 +29,5 @@ function initPlugin(on, globalConfig = {}) {
 }
 
 module.exports = {
-  initPlugin
+  initPlugin,
 };
