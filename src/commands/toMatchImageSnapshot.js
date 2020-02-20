@@ -26,7 +26,7 @@ async function toMatchImageSnapshot(subject, commandOptions) {
     commandName,
     options,
     customName,
-    subject
+    subject,
   });
 
   const screenShotConfig = commandOptions.screenshotConfig;
@@ -41,13 +41,10 @@ async function toMatchImageSnapshot(subject, commandOptions) {
     screenShotConfig.onAfterScreenshot = afterScreenshotFn;
   }
 
-  return cy.wrap(subject, NO_LOG)
+  return cy
+    .wrap(subject, NO_LOG)
     .screenshot(taskData.snapshotTitle, screenShotConfig)
-    .then(() => cy.task(
-      MATCH_IMAGE,
-      taskData,
-      NO_LOG
-    ).then(logMessage));
+    .then(() => cy.task(MATCH_IMAGE, taskData, NO_LOG).then(logMessage));
 }
 
 module.exports = toMatchImageSnapshot;

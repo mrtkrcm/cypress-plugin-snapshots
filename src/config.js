@@ -8,7 +8,7 @@ const DEFAULT_IMAGE_CONFIG = Object.freeze({
   createDiffImage: true,
   resizeDevicePixelRatio: true,
   threshold: 0.1,
-  thresholdType: 'percent' // can be 'percent' or 'pixel'
+  thresholdType: 'percent', // can be 'percent' or 'pixel'
 });
 
 const DEFAULT_CONFIG = Object.freeze({
@@ -26,16 +26,16 @@ const DEFAULT_CONFIG = Object.freeze({
     html: {
       parser: 'html',
       tabWidth: 2,
-      endOfLine: 'lf'
-    }
+      endOfLine: 'lf',
+    },
   },
   screenshotConfig: {
     blackout: ['.snapshot-diff'],
-    log: false
+    log: false,
   },
   updateSnapshots: false,
   backgroundBlend: 'difference',
-  diffFormat: 'side-by-side'
+  diffFormat: 'side-by-side',
 });
 
 let config = cloneDeep(DEFAULT_CONFIG);
@@ -72,7 +72,7 @@ function mergeConfig(commandName, taskOptions) {
     'scale',
     'timeout',
     'onBeforeScreenshot',
-    'onAfterScreenshot'
+    'onAfterScreenshot',
   ];
 
   merge(options.imageConfig, pick(taskOptions, Object.keys(DEFAULT_CONFIG.imageConfig)));
@@ -90,5 +90,5 @@ module.exports = {
   DEFAULT_IMAGE_CONFIG,
   initConfig,
   getConfig,
-  mergeConfig
+  mergeConfig,
 };
