@@ -1,3 +1,4 @@
+const { initConfig, CONFIG_KEY } = require('./src/config');
 const tasks = require('./src/tasks/');
 
 /**
@@ -7,14 +8,24 @@ const tasks = require('./src/tasks/');
  * @param {Function} on - Method to register tasks
  * @param {Object} globalConfig - Object containing global Cypress config
  */
-function initPlugin(on, globalConfig = {}) { /* eslint-disable-line  no-unused-vars */
-  on('before:browser:launch', (browser = {}, args) => {
+function initPlugin(on, globalConfig = {}) {
+  const config = initConfig(globalConfig.env[CONFIG_KEY]);
+
+  // Adding sub objects/keys to `Cypress.env` that don't exist in `cypress.json` doesn't work.
+  // That's why the config is stringified and parsed again in `src/utils/commands/getConfig.js#fixConfig`.
+  globalConfig.env[CONFIG_KEY] = JSON.stringify(config);
+
+  on('before:browser:launch', (browser = {}, launchOptions) => {
+    // Adding sub objects/keys to `Cypress.env` that don't exist in `cypress.json` doesn't work.
+    // That's why the config is stringified and parsed again in `src/utils/commands/getConfig.js#fixConfig`.
+    globalConfig.env[CONFIG_KEY] = JSON.stringify(config);
+    
     if (browser.name === 'chrome') {
-      args.push('--font-render-hinting=medium');
-      args.push('--enable-font-antialiasing');
-      args.push('--disable-gpu');
+      launchOptions.args.push('--font-render-hinting=medium');
+      launchOptions.args.push('--enable-font-antialiasing');
+      launchOptions.args.push('--disable-gpu');
     }
-    return args;
+    return launchOptions;
   });
 
   on('task', tasks);
