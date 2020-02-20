@@ -1,4 +1,5 @@
 # cypress-plugin-snapshots
+
 > Plugin for snapshot tests in [Cypress.io](https://www.cypress.io/).
 
 [![NPM][npm-icon]][npm-url]
@@ -8,19 +9,23 @@
 ![cypress-plugin-snapshots](docs/images/cypress-plugin-snapshots.png)
 
 ## Installation
+
 `npm i cypress-plugin-snapshots -S`
 
 ## Usage for text snapshots
+
 ```javascript
 describe('data test', () => {
   it('toMatchSnapshot - JSON', () => {
-    return cy.request('data.json')
+    return cy
+      .request('data.json')
       .its('body')
       .toMatchSnapshot();
   });
 
   it('toMatchSnapshot - JSON with options', () => {
-    return cy.request('data.json')
+    return cy
+      .request('data.json')
       .its('body')
       .toMatchSnapshot({
         ignoreExtraFields: true,
@@ -28,15 +33,15 @@ describe('data test', () => {
   });
 
   it('toMatchSnapshot - HTML', () => {
-    cy.visit('page.html')
-      .then(() => {
-        cy.get('div').toMatchSnapshot();
-      });
+    cy.visit('page.html').then(() => {
+      cy.get('div').toMatchSnapshot();
+    });
   });
 });
 ```
 
 You can pass the following options to `toMatchSnapshot` to override default behavior.
+
 ```javascript
 {
   "ignoreExtraFields": false,         // Ignore fields that are not in snapshot
@@ -53,25 +58,23 @@ Use `replace` with caution. Tests should be deterministic. It's often a better s
 test result instead of your snapshot (by mocking data for example).
 
 ## Usage for image snapshots
+
 ```javascript
 it('toMatchImageSnapshot - element', () => {
-  cy.visit('/static/stub.html')
-    .then(() => {
-      cy.get('[data-test=test]')
-        .toMatchImageSnapshot();
-    });
+  cy.visit('/static/stub.html').then(() => {
+    cy.get('[data-test=test]').toMatchImageSnapshot();
+  });
 });
 
 it('toMatchImageSnapshot - whole page', () => {
-  cy.visit('/static/stub.html')
-    .then(() => {
-      cy.document()
-        .toMatchImageSnapshot();
-    });
+  cy.visit('/static/stub.html').then(() => {
+    cy.document().toMatchImageSnapshot();
+  });
 });
 ```
 
 You can pass the following options to `toMatchImageSnapshot` to override default behavior.
+
 ```javascript
 {
   "failOnSnapshotDiff": true,    // Should the test fail when snapshots do not match
@@ -85,15 +88,17 @@ You can pass the following options to `toMatchImageSnapshot` to override default
 You can also use any option from the `cypress.screenshot` [arguments list](https://docs.cypress.io/api/commands/screenshot.html#Arguments).
 
 For example:
+
 ```javascript
-cy.get('.element')
-  .toMatchImageSnapshot({
-    clip: { x: 0, y: 0, width: 100, height: 100 },
-  });
+cy.get('.element').toMatchImageSnapshot({
+  clip: { x: 0, y: 0, width: 100, height: 100 },
+});
 ```
 
 ## Configure Cypress.io
+
 Add this to your `cypress.json` configuration file:
+
 ```json
 "ignoreTestFiles": [
   "**/__snapshots__/*",
@@ -102,6 +107,7 @@ Add this to your `cypress.json` configuration file:
 ```
 
 ### Plugin
+
 Find your `cypress/plugins/index.js` file and change it to look like this:
 
 ```javascript
@@ -114,6 +120,7 @@ module.exports = (on, config) => {
 ```
 
 ### Command
+
 Find your `cypress/support/index.js` file and add the following line:
 
 ```javascript
@@ -121,6 +128,7 @@ import 'cypress-plugin-snapshots/commands';
 ```
 
 ### Make changes to default configuration
+
 You can customize the configuration in the `cypress.json` file in the root of your Cypress project.
 
 Add the configuration below to your `cypress.json` file to make changes to the default values.
@@ -145,24 +153,26 @@ Add the configuration below to your `cypress.json` file to make changes to the d
     },
     "screenshotConfig": {            // See https://docs.cypress.io/api/commands/screenshot.html#Arguments
       "blackout": [],
-      "capture": 'fullPage',
+      "capture": "fullPage",
       "clip": null,
       "disableTimersAndAnimations": true,
       "log": false,
       "scale": false,
-      "timeout": 30000,
+      "timeout": 30000
     },
     "updateSnapshots": false,        // Automatically update snapshots, useful if you have lots of changes
     "backgroundBlend": "difference", // background-blend-mode for diff image, useful to switch to "overlay"
-    "diffFormat": "side-by-side"     // Options: side-by-side or line-by-line 
+    "diffFormat": "side-by-side"     // Options: side-by-side or line-by-line
   }
 }
 ```
 
 ## Caveats :warning:
+
 There is currently an issue when running "All Tests" in Cypress with this plugin. You can follow the progress on the issue [here](https://github.com/meinaart/cypress-plugin-snapshots/issues/10) and [here](https://github.com/cypress-io/cypress/issues/3090). When running "All Tests" any tests that utilize `cypress-plugin-snapshots` will throw an error.
 
 ## Roadmap
+
 Below is a list of functionality that is under consideration for implementing in a next version.
 
 - Fix handling of "update snapshot" button that contains a replacable field
@@ -172,9 +182,11 @@ Below is a list of functionality that is under consideration for implementing in
 - Improve TypeScript bindings
 
 ## Contributing
+
 In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## License
+
 This plugin is released under the MIT license.
 
 [npm-icon]: https://nodei.co/npm/cypress-plugin-snapshots.svg?downloads=true
