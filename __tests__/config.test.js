@@ -2,9 +2,14 @@ const rewire = require('rewire');
 const { cloneDeep } = require('lodash');
 const { initCommands } = require('../commands');
 const { getConfig, mergeConfig } = require('../src/config');
-const { COMMAND_MATCH_SNAPSHOT, COMMAND_MATCH_IMAGE_SNAPSHOT } = require('../src/commands/commandNames');
+const {
+  COMMAND_MATCH_SNAPSHOT,
+  COMMAND_MATCH_IMAGE_SNAPSHOT,
+} = require('../src/commands/commandNames');
 
-const DEFAULT_CONFIG = cloneDeep(rewire('../src/config').__get__('DEFAULT_CONFIG')); /* eslint-disable-line */
+const DEFAULT_CONFIG = cloneDeep(
+  rewire('../src/config').__get__('DEFAULT_CONFIG')
+); /* eslint-disable-line */
 
 describe('config', () => {
   it('verify default config', () => {
@@ -18,7 +23,7 @@ describe('config', () => {
         ignoreExtraFields: true,
         ignoreExtraArrayItems: true,
         normalizeJson: false,
-        foo: 'should be ignored'
+        foo: 'should be ignored',
       });
 
       expect(config).toMatchSnapshot();
@@ -43,9 +48,9 @@ describe('config', () => {
           x: 0,
           y: 0,
           height: 100,
-          width: 100
+          width: 100,
         },
-        foo: 'should be ignored'
+        foo: 'should be ignored',
       });
 
       expect(config).toMatchSnapshot();
@@ -69,9 +74,9 @@ describe('config', () => {
           x: 0,
           y: 0,
           height: 100,
-          width: 100
+          width: 100,
         },
-        foo: 'should be ignored'
+        foo: 'should be ignored',
       });
 
       expect(config).toMatchSnapshot();
