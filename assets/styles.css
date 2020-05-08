@@ -6,7 +6,7 @@
 
 .command-name-toMatchImageSnapshot .command-method span,
 .command-name-toMatchSnapshot .command-method span,
-a[href^="#cypress-plugin-snapshot-"] {
+a[href^='#cypress-plugin-snapshot-'] {
   border-radius: 2px;
   padding: 0px 4px;
   font-size: 11px;
@@ -15,9 +15,9 @@ a[href^="#cypress-plugin-snapshot-"] {
 
 .command-name-toMatchImageSnapshot .command-method span:hover,
 .command-name-toMatchSnapshot .command-method span:hover,
-a[href^="#cypress-plugin-snapshot-"]:hover,
-a[href^="#cypress-plugin-snapshot-"]:active,
-a[href^="#cypress-plugin-snapshot-"]:focus {
+a[href^='#cypress-plugin-snapshot-']:hover,
+a[href^='#cypress-plugin-snapshot-']:active,
+a[href^='#cypress-plugin-snapshot-']:focus {
   box-shadow: 0 2px 4px 0 rgba(111, 111, 111, 0.6), 0 1px 1px 0 rgba(111, 111, 111, 0.6);
   text-decoration: none;
   color: white;
@@ -30,8 +30,8 @@ a[href^="#cypress-plugin-snapshot-"]:focus {
   background-color: #565554;
 }
 
-.command-name-toMatchImageSnapshot.command-state-failed+.command-name-then,
-.command-name-toMatchSnapshot.command-state-failed+.command-name-then {
+.command-name-toMatchImageSnapshot.command-state-failed + .command-name-then,
+.command-name-toMatchSnapshot.command-state-failed + .command-name-then {
   display: none;
 }
 
@@ -43,54 +43,82 @@ a[href^="#cypress-plugin-snapshot-"]:focus {
 }
 
 .command-name-toMatchImageSnapshot .command-method span:after {
-  content: "\f03e";  
+  content: '\f03e';
 }
 
 .command-name-toMatchSnapshot .command-method span:after {
-  content: "\f0f6";
+  content: '\f0f6';
 }
 
 /* Log - Snapshot State */
-a[href^="#cypress-plugin-snapshot-"] {
+a[href^='#cypress-plugin-snapshot-'] {
   display: inline-block;
   margin-top: 1px;
   color: white;
-  margin-left: 2px;
+  text-decoration: none;
+  background: #08c18d;
+}
+
+.command-state-failed a[href^='#cypress-plugin-snapshot-']:active,
+.command-state-failed a[href^='#cypress-plugin-snapshot-']:hover,
+.command-state-failed a[href^='#cypress-plugin-snapshot-']:focus {
+  background-color: #e94f5f;
+  border-color: #e94f5f;
+}
+
+.command-state-pending a[href^='#cypress-plugin-snapshot-'],
+.command-state-pending a[href^='#cypress-plugin-snapshot-']:active,
+.command-state-pending a[href^='#cypress-plugin-snapshot-']:hover,
+.command-state-pending a[href^='#cypress-plugin-snapshot-']:focus {
+  background-color: #428bca;
+  border-color: #428bca;
+}
+
+.command-state-failed a[href^='#cypress-plugin-snapshot-']:hover {
+  color: #fad7db;
+}
+
+a[href^='#cypress-plugin-snapshot-']:before {
+  content: '√ ';
   font-weight: bold;
 }
 
-.command-state-passed a[href^="#cypress-plugin-snapshot-"] {
-  background-color: #08c18d;
+.command-state-pending a[href^='#cypress-plugin-snapshot-']:before {
+  content: '!! ';
 }
 
-.command-state-passed a[href^="#cypress-plugin-snapshot-"]:before {
-  content: "√ PASSED";
+.command-state-failed a[href^='#cypress-plugin-snapshot-']:before {
+  content: '<> ';
 }
 
-.command-state-failed a[href^="#cypress-plugin-snapshot-"] {
+.command-state-passed a[href^='#cypress-plugin-snapshot-']:before {
+  content: '√ PASSED';
+}
+
+.command-state-failed a[href^='#cypress-plugin-snapshot-'] {
   background-color: #e94f5f;
 }
 
-.command-state-failed a[href^="#cypress-plugin-snapshot-"]:before {
-  content: "<> COMPARE SNAPSHOTS";
+.command-state-failed a[href^='#cypress-plugin-snapshot-']:before {
+  content: '<> COMPARE SNAPSHOTS';
 }
 
-.command-state-new a[href^="#cypress-plugin-snapshot-"] {
+.command-state-new a[href^='#cypress-plugin-snapshot-'] {
   background-color: #3366ff;
 }
 
-.command-state-new a[href^="#cypress-plugin-snapshot-"]:before {
-  content: "√ NEW";
+.command-state-new a[href^='#cypress-plugin-snapshot-']:before {
+  content: '√ NEW';
 }
 
-.command-state-new a[href^="#cypress-plugin-snapshot-"],
-a[href^="#cypress-plugin-snapshot-"].updated {
+.command-state-new a[href^='#cypress-plugin-snapshot-'],
+a[href^='#cypress-plugin-snapshot-'].updated {
   background-color: #8000ff;
 }
 
-.command-state-new a[href^="#cypress-plugin-snapshot-"]:before,
-a[href^="#cypress-plugin-snapshot-"].updated:before {
-  content: "√ UPDATED";
+.command-state-new a[href^='#cypress-plugin-snapshot-']:before,
+a[href^='#cypress-plugin-snapshot-'].updated:before {
+  content: '√ UPDATED';
 }
 
 /* Modal */
@@ -137,14 +165,15 @@ a[href^="#cypress-plugin-snapshot-"].updated:before {
 }
 
 .btn-group-right {
-  margin-left:auto;
+  margin-left: auto;
 }
 
 .btn-group-right > * {
   margin-left: 0.5em;
 }
 
-.d2h-file-name-wrapper button, .d2h-file-name-wrapper select {
+.d2h-file-name-wrapper button,
+.d2h-file-name-wrapper select {
   border: 0;
   font-size: 12px;
   padding: 6px;
@@ -165,7 +194,6 @@ a[href^="#cypress-plugin-snapshot-"].updated:before {
   color: white;
   font-weight: bold;
 }
-
 
 /* Tags */
 .d2h-tag {
@@ -201,7 +229,6 @@ a[href^="#cypress-plugin-snapshot-"].updated:before {
   content: 'NEW';
 }
 
-
 /* Content */
 .d2h-file-diff {
   position: relative;
@@ -225,7 +252,6 @@ a[href^="#cypress-plugin-snapshot-"].updated:before {
   border-color: #d5e4f2;
 }
 
-
 /* Content - Image */
 .snapshot-image {
   display: inline-block;
@@ -237,9 +263,9 @@ a[href^="#cypress-plugin-snapshot-"].updated:before {
 
 .snapshot-image__title {
   color: #555;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: bold;
-  margin-bottom: .25em;
+  margin-bottom: 0.25em;
   text-align: center;
   font-size: 14px;
   text-transform: capitalize;

@@ -1,6 +1,15 @@
 const { Base64 } = require('js-base64');
 const { cloneDeep } = require('lodash');
 const { URL_PREFIX } = require('../../constants');
+const { TYPE_IMAGE } = require('../../dataTypes');
+
+function getErrorMessage(result) {
+  if (result.dataType === TYPE_IMAGE) {
+    return `Snapshot images do not match.`;
+  }
+
+  return `Snapshots do not match:\n${result.diff}`;
+}
 
 function cleanupImage(image) {
   if (image) {
@@ -19,36 +28,41 @@ function getLogMessage(result) {
   }
 
   const args = Base64.encode(JSON.stringify(linkResult));
-  return `[ ](${URL_PREFIX}${args})`;
+  const expectedMessage = result.expected ? 'Snapshots match' : 'Snapshot created, autopassed';
+  const passedMessage = result.updated ? 'Snapshot updated' : expectedMessage;
+  const message =
+    result.passed || result.updated
+      ? `[${passedMessage}](${URL_PREFIX}${args})`
+      : `[compare snapshot](${URL_PREFIX}${args})`;
+
+  return message;
 }
 
 function logMessage(result) {
-  const {
-    passed,
-    exists,
-    updated
-  } = result;
+  if (!result.passed) {
+    const updated = result.updated === true;
 
-  if (passed) {
-    result.state = 'passed';
-  } else if(!exists) {
-    result.state = 'new';
-  } else if (updated) {
-    result.state = 'updated';
-  } else {
-    result.state = 'failed';
+    if (updated) {
+      log.set('state', 'pending');
+      log.set('ended', true);
+    } else {
+      log.set('state', 'failed');
+
+      const errorMessage = getErrorMessage(result);
+      throw new Error(errorMessage);
+    }
   }
 
   const log = Cypress.log({
     name: result.commandName,
     displayName: 'snapshot',
     message: getLogMessage(result),
-    consoleProps: () => result
+    consoleProps: () => result,
   });
 
   log.set('state', result.state);
 
-  if (!passed) {
+  if (!result.passed) {
     throw new Error('Snapshots do not match.');
   }
 
