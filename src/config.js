@@ -88,7 +88,7 @@ function getScreenshotConfig(options = {}) {
         currentConfig[key] = options.screenshotConfig[key];
         return currentConfig;
       },
-      merge({}, DEFAULT_SCREENSHOT_CONFIG, getConfig().screenshotConfig)
+      merge({}, DEFAULT_SCREENSHOT_CONFIG, getConfig().screenshotConfig, options)
     );
 
   screenshotConfig.blackout = (screenshotConfig.blackout || []);
