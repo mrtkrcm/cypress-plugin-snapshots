@@ -27,6 +27,7 @@ jobs:
         run: npm run lint
       - name: Test
         run: |
+          chmod 755 /__w/cypress-plugin-snapshots/cypress-plugin-snapshots/cypress
           npm run ci:test
           kill $(jobs -p) || true
       - name: Archive Cypress snapshots
