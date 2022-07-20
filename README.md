@@ -2,8 +2,6 @@
 
 > Plugin for snapshot tests in [Cypress.io](https://www.cypress.io/).
 
-[![NPM][npm-icon]][npm-url]
-
 [![Build status][ci-image]][ci-url]
 
 ![cypress-plugin-snapshots](docs/images/cypress-plugin-snapshots.png)
@@ -197,7 +195,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 This plugin is released under the MIT license.
 
-[npm-icon]: https://nodei.co/npm/cypress-plugin-snapshots.svg?downloads=true
-[npm-url]: https://npmjs.org/package/cypress-plugin-snapshots
-[ci-image]: https://github.com/meinaart/cypress-plugin-snapshots/workflows/test/badge.svg?branch=master
-[ci-url]: https://github.com/meinaart/cypress-plugin-snapshots/actions
+[ci-image]: https://github.com/ivangabriele/cypress-plugin-snapshots/workflows/test/badge.svg?branch=master
+[ci-url]: https://github.com/ivangabriele/cypress-plugin-snapshots/actions
