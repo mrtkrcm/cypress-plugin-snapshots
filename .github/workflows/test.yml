@@ -1,20 +1,15 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+name: Test
 
-name: test
-
-on: [push]
+on: push
 
 jobs:
   test:
-    runs-on: ubuntu-16.04
-    # Cypress Docker image with Chrome v78
-    # and Firefox v70 pre-installed
-    container: cypress/browsers:node12.13.0-chrome78-ff70
+    runs-on: ubuntu-22.04
+    container: cypress/browsers:latest
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [16, 18]
 
     steps:
     - uses: actions/checkout@v2
@@ -22,19 +17,22 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Cache Node.js modules
-      uses: actions/cache@v1
+    # https://github.com/actions/cache/blob/main/examples.md#node---npm
+    - name: Cache
+      uses: actions/cache@v3
       with:
-        path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
-        key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.OS }}-node-
-          ${{ runner.OS }}-
-    - name: npm install, build, and test
+          ${{ runner.os }}-node-
+    - name: Install
       run: |
         npm ci
         npm --prefix cypress ci
-        npm run lint &
+    - name: Lint
+      run: npm run lint
+    - name: Test
+      run: |
         npm run ci:test
         kill $(jobs -p) || true
     - name: Archive Cypress snapshots

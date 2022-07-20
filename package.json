@@ -1,13 +1,12 @@
 {
   "name": "cypress-plugin-snapshots",
-  "version": "1.4.4",
   "description": "Cypress snapshot functionality for data",
-  "homepage": "https://github.com/meinaart/cypress-plugin-snapshots",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/meinaart/cypress-plugin-snapshots.git"
+  "version": "1.4.4",
+  "license": "MIT",
+  "engine": {
+    "node": ">=16",
+    "npm": ">=8"
   },
-  "types": "types/index.d.ts",
   "files": [
     "*.js",
     "*.md",
@@ -17,19 +16,7 @@
     "src",
     "types"
   ],
-  "engines": {
-    "node": ">=8.2.1"
-  },
-  "bugs": {
-    "url": "https://github.com/meinaart/cypress-plugin-snapshots/issues"
-  },
-  "keywords": [
-    "cypress",
-    "cypress-io",
-    "cypress-plugin"
-  ],
-  "author": "Meinaart van Straalen",
-  "license": "MIT",
+  "types": "types/index.d.ts",
   "scripts": {
     "ci:test": "jest & npm --prefix cypress run ci:test",
     "cy:open": "npm --prefix cypress run cy:open",
@@ -56,9 +43,6 @@
     "source-map-support": "^0.5.10",
     "unidiff": "1.0.2"
   },
-  "peerDependencies": {
-    "cypress": "^4.5.0"
-  },
   "devDependencies": {
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -69,11 +53,8 @@
     "jest": "^24.1.0",
     "rewire": "^4.0.1"
   },
-  "prettier": {
-    "printWidth": 100,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
+  "peerDependencies": {
+    "cypress": "^10.0.0"
   },
   "eslintConfig": {
     "extends": [
