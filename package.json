@@ -55,7 +55,7 @@
     "rewire": "4.0.1"
   },
   "peerDependencies": {
-    "cypress": "^10.0.0"
+    "cypress": "^10.0.0 || ^11.0.0"
   },
   "eslintConfig": {
     "extends": [
