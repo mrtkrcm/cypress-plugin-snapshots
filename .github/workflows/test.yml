@@ -36,4 +36,4 @@ jobs:
         if: failure()
         with:
           name: cypress-snapshots
-          path: cypress/cypress/integration/__*snapshots__/*
+          path: cypress/cypress/e2e/__*snapshots__/*
