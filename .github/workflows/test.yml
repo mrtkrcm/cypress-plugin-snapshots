@@ -3,9 +3,20 @@ name: Test
 on: push
 
 jobs:
+  configure:
+    runs-on: ubuntu-latest
+    outputs:
+      uid_gid: ${{ steps.get-user.outputs.uid_gid }}
+    steps:
+      - id: get-user
+        run: echo "::set-output name=uid_gid::$(id -u):$(id -g)"
+
   test:
-    runs-on: ubuntu-22.04
-    container: cypress/browsers:latest
+    needs: configure
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:latest
+      options: --user ${{ needs.configure.outputs.uid_gid }}
 
     strategy:
       matrix:
@@ -32,8 +43,9 @@ jobs:
           npm run ci:test
           kill $(jobs -p) || true
       - name: Archive Cypress snapshots
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: cypress-snapshots
-          path: cypress/cypress/e2e/__*snapshots__/*
+          path:
+            cypress/cypress/e2e/__snapshots__/*
