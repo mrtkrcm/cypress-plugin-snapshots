@@ -9,7 +9,7 @@ jobs:
       uid_gid: ${{ steps.get-user.outputs.uid_gid }}
     steps:
       - id: get-user
-        run: echo "::set-output name=uid_gid::$(id -u):$(id -g)"
+        run: echo "uid_gid=$(id -u):$(id -g)" >> $GITHUB_OUTPUT
 
   test:
     needs: configure
@@ -17,6 +17,8 @@ jobs:
     container:
       image: cypress/browsers:latest
       options: --user ${{ needs.configure.outputs.uid_gid }}
+    env:
+      plugindir: /__w/cypress-plugin-snapshots/cypress-plugin-snapshots
 
     strategy:
       matrix:
@@ -38,14 +40,13 @@ jobs:
         run: npm run lint
       - name: Test
         run: |
-          chmod o+w /__w/cypress-plugin-snapshots/cypress-plugin-snapshots/cypress
-          ls -la /__w/cypress-plugin-snapshots/cypress-plugin-snapshots/cypress
           npm run ci:test
           kill $(jobs -p) || true
       - name: Archive Cypress snapshots
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: cypress-snapshots
-          path:
-            cypress/cypress/e2e/__snapshots__/*
+          path: |
+            ${{ env.plugindir }}/cypress/cypress/e2e/__snapshots__/
+            ${{ env.plugindir }}/cypress/cypress/e2e/__image_snapshots__/
