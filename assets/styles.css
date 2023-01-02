@@ -35,21 +35,6 @@ a[href^='#cypress-plugin-snapshot-']:focus {
   display: none;
 }
 
-.command-name-toMatchImageSnapshot .command-method span:after,
-.command-name-toMatchSnapshot .command-method span:after {
-  font-family: FontAwesome;
-  float: left;
-  margin-right: 3px;
-}
-
-.command-name-toMatchImageSnapshot .command-method span:after {
-  content: '\f03e';
-}
-
-.command-name-toMatchSnapshot .command-method span:after {
-  content: '\f0f6';
-}
-
 /* Log - Snapshot State */
 a[href^='#cypress-plugin-snapshot-'] {
   display: inline-block;
@@ -88,19 +73,15 @@ a[href^='#cypress-plugin-snapshot-']:before {
 }
 
 .command-state-failed a[href^='#cypress-plugin-snapshot-']:before {
-  content: '<> ';
+  content: '<> COMPARE ';
 }
 
 .command-state-passed a[href^='#cypress-plugin-snapshot-']:before {
-  content: '√ PASSED';
+  content: '√ PASSED ';
 }
 
 .command-state-failed a[href^='#cypress-plugin-snapshot-'] {
   background-color: #e94f5f;
-}
-
-.command-state-failed a[href^='#cypress-plugin-snapshot-']:before {
-  content: '<> COMPARE SNAPSHOTS';
 }
 
 .command-state-new a[href^='#cypress-plugin-snapshot-'] {
@@ -108,7 +89,7 @@ a[href^='#cypress-plugin-snapshot-']:before {
 }
 
 .command-state-new a[href^='#cypress-plugin-snapshot-']:before {
-  content: '√ NEW';
+  content: '√ NEW ';
 }
 
 .command-state-new a[href^='#cypress-plugin-snapshot-'],
@@ -118,7 +99,7 @@ a[href^='#cypress-plugin-snapshot-'].updated {
 
 .command-state-new a[href^='#cypress-plugin-snapshot-']:before,
 a[href^='#cypress-plugin-snapshot-'].updated:before {
-  content: '√ UPDATED';
+  content: '√ UPDATED ';
 }
 
 /* Modal */

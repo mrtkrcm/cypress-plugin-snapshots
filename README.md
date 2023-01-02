@@ -195,5 +195,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 This plugin is released under the MIT license.
 
-[ci-image]: https://github.com/ivangabriele/cypress-plugin-snapshots/workflows/test/badge.svg?branch=master
-[ci-url]: https://github.com/ivangabriele/cypress-plugin-snapshots/actions
+[ci-image]: https://github.com/mrtkrcm/cypress-plugin-snapshots/workflows/test/badge.svg?branch=master
+[ci-url]: https://github.com/mrtkrcm/cypress-plugin-snapshots/actions

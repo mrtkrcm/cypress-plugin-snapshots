@@ -1,8 +1,16 @@
 {
-  "name": "cypress-plugin-snapshots",
+  "name": "@mrtkrcm/cypress-plugin-snapshots",
   "description": "Cypress snapshot functionality for data",
   "version": "1.4.4",
   "license": "MIT",
+  "homepage": "https://github.com/mrtkrcm/cypress-plugin-snapshots",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrtkrcm/cypress-plugin-snapshots.git"
+  },
+  "publishConfig": {
+    "@mrtkrcm:registry": "https://npm.pkg.github.com"
+  },
   "engine": {
     "node": ">=18",
     "npm": ">=8"
