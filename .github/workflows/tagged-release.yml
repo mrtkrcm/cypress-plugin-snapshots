@@ -4,7 +4,7 @@ name: "tagged-release"
 on:
   push:
     tags:
-      - "*"
+      - "v*"
 
 permissions:
   packages: write
@@ -26,7 +26,7 @@ jobs:
           draft: false
           prerelease: false
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     needs: create-release
