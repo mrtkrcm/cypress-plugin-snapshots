@@ -1,6 +1,6 @@
 {
   "name": "cypress-plugin-snapshots",
-  "description": "Cypress snapshot functionality for data",
+  "description": "Cypress snapshot functionality for data.",
   "version": "1.4.5",
   "license": "MIT",
   "engine": {
