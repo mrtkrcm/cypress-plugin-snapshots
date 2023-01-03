@@ -127,5 +127,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/mrtkrcm/cypress-plugin-snapshots.git"
+  },
+  "publishConfig": {
+    "@mrtkrcm:registry": "https://npm.pkg.github.com"
   }
 }
