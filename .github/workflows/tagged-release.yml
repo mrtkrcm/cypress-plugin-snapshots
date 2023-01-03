@@ -1,9 +1,10 @@
-name: Publish (on tags)
+---
+name: "tagged-release"
 
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 permissions:
   packages: write
