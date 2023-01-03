@@ -5,6 +5,8 @@ on:
   push:
     tags:
       - "v*"
+    branches:
+      - main
 
 permissions:
   packages: write
@@ -29,6 +31,7 @@ jobs:
           prerelease: false
 
   build:
+    needs: create-release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
