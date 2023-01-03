@@ -1,7 +1,7 @@
 {
   "name": "@mrtkrcm/cypress-plugin-snapshots",
   "description": "Cypress snapshot functionality for data.",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "license": "MIT",
   "engine": {
     "node": ">=18",
