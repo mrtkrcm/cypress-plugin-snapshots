@@ -4,6 +4,10 @@ on:
   release:
     types: [created]
 
+permissions:
+  packages: write
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,12 +18,9 @@ jobs:
       - name: Install
         run: npm install
 
-  publish-gpr:
+  publish:
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -27,12 +28,6 @@ jobs:
           node-version: '18.x'
           registry-url: 'https://npm.pkg.github.com'
       - run: npm ci
-      - name: Publish to GitHub Package Registry
-        run: |
-          sed -i 's+"name": ".*+"name": "@${{ github.repository }}",+gI' ./package.json
-          npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Authenticate with GitHub package registry
         run:
           echo "//npm.pkg.github.com:_authToken=${{ secrets.GITHUB_TOKEN }}" >
